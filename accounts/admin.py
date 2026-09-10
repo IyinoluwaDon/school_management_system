@@ -3,9 +3,11 @@ from django.contrib.auth.admin import UserAdmin
 
 from .models import User
 
-
 @admin.register(User)
 class SchoolUserAdmin(UserAdmin):
+    # Add this line so Django knows not to try and render an editable input box
+    readonly_fields = ("digital_token",)
+    
     fieldsets = UserAdmin.fieldsets + (
         ("School access", {"fields": ("role", "digital_token")}),
     )
