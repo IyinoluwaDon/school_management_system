@@ -1,4 +1,6 @@
 from django.urls import path
+from . import finance_views
+from . import academic_views
 
 from . import views
 
@@ -16,4 +18,12 @@ urlpatterns = [
     path("scheduling/generate-timetable/", views.generate_timetable_api, name="generate-timetable-api"),
     path("scheduling/generate-seating/", views.generate_seating_api, name="generate-seating-api"),
     path("scheduling/seating/<int:paper_id>/", views.seating_plan_api, name="seating-plan-api"),
+    # Finance Routes
+    path('finance/invoices/', finance_views.invoices_api, name='invoices_api'),
+    path('finance/paystack/initialize/', finance_views.paystack_initialize_api, name='paystack_initialize'),
+
+    # Academic Routes
+    path('academics/roster/<int:assessment_id>/', academic_views.roster_api, name='roster_api'),
+    path('academics/grades/bulk-save/', academic_views.bulk_save_grades_api, name='bulk_save_grades'),
+
 ]
